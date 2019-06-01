@@ -17,15 +17,18 @@ public class TencentMessage extends IcqListener {
 		String message = evt.getMessage();
 		String username;
 		
-		if(tu.hasNickname()) {
-			username = tu.getNickname(sender);
-		} else {
-			username = evt.getSender().getInfo().getNickname();
+		if(!tu.isSilent()) {
+			if(tu.hasNickname()) {
+				username = tu.getNickname(sender);
+			} else {
+				username = evt.getSender().getInfo().getNickname();
+			}
+			
+			String msg = String.format("<%s> %s", username, replace(message));
+			Bukkit.broadcastMessage(msg);
+			ConnectionPlugin.log(msg);
 		}
 		
-		String msg = String.format("<%s> %s", username, replace(message));
-		Bukkit.broadcastMessage(msg);
-		ConnectionPlugin.log(msg);
 	}
 	
 	public String replace(String str) {

@@ -5,6 +5,7 @@ import cc.moecraft.icq.PicqConfig;
 import cc.moecraft.icq.sender.IcqHttpApi;
 import cc.moecraft.logger.environments.ColorSupportLevel;
 import ren.taske.connection.cmd.CommandNickname;
+import ren.taske.connection.cmd.CommandSilent;
 import ren.taske.connection.cmd.CommandWhitelist;
 
 public class McBot implements Runnable {
@@ -19,7 +20,7 @@ public class McBot implements Runnable {
 		bot.enableCommandManager("!");
 		bot.getEventManager().registerListener(new TencentMessage());
 		
-		bot.getCommandManager().registerCommands(new CommandWhitelist(), new CommandNickname());
+		bot.getCommandManager().registerCommands(new CommandWhitelist(), new CommandNickname(), new CommandSilent());
 		
 	}
 	
