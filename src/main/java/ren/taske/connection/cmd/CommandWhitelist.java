@@ -7,10 +7,9 @@ import org.bukkit.OfflinePlayer;
 import cc.moecraft.icq.command.CommandProperties;
 import cc.moecraft.icq.command.interfaces.EverywhereCommand;
 import cc.moecraft.icq.event.events.message.EventMessage;
-import cc.moecraft.icq.sender.message.MessageBuilder;
-import cc.moecraft.icq.sender.message.components.ComponentAt;
 import cc.moecraft.icq.user.User;
 import ren.taske.connection.ConnectionPlugin;
+import ren.taske.connection.util.BotUtil;
 
 public class CommandWhitelist implements EverywhereCommand {
 
@@ -19,74 +18,39 @@ public class CommandWhitelist implements EverywhereCommand {
 		return new CommandProperties("whitelist", "wl");
 	}
 	
+	public static final String[] MSG_HELP = new String[] {
+		"[[Whitelist/OP]]", "!whitelist add <player>", "!whitelist remove <player>"	
+	};
+	
+	public static final String MSG_UNAUTHORIZED  = "You have not permission!";
+	public static final String MSG_RESULT_ADD    = "Added %s to Whitelist";
+	public static final String MSG_RESULT_REMOVE = "Removed %s in Whitelist";
+	
+	@SuppressWarnings("deprecation")
 	@Override
 	public String run(EventMessage event, User sender, String command, ArrayList<String> args) {
+		if(!ConnectionPlugin.isOwner(sender.getId())) return BotUtil.genRetMsg(sender.getId(), MSG_UNAUTHORIZED); // Unauthorized
+		
 		if(args.size() != 2) {
-			return getHelp(sender);
-		}
-		if(args.size() == 2) {
-			if(args.get(0).equalsIgnoreCase("add")) {
-				String msg;
-				if(ConnectionPlugin.isOwner(sender.getId())) {
-					String username = args.get(1);
-					@SuppressWarnings("deprecation")
-					OfflinePlayer player = ConnectionPlugin.server().getOfflinePlayer(username);
-					player.setWhitelisted(true);
-					msg = getOperateDone(sender, player, true);
-				} else {
-					msg = getNoPerm(sender);
-				}
-				return msg;
-			}
-			if(args.get(0).equalsIgnoreCase("remove")) {
-				String msg;
-				if(ConnectionPlugin.isOwner(sender.getId())) {
-					String username = args.get(1);
-					@SuppressWarnings("deprecation")
-					OfflinePlayer player = ConnectionPlugin.server().getOfflinePlayer(username);
-					player.setWhitelisted(false);
-					msg = getOperateDone(sender, player, false);
-				} else {
-					msg = getNoPerm(sender);
-				}
-				return msg;
+			return BotUtil.genRetMsg(sender.getId(), MSG_HELP);
+		} else {
+			// -1: wrong arguments
+			//  0: remove
+			//  1: add
+			int type = -1;
+			if(args.get(0).equalsIgnoreCase("add"))    type = 1;
+			if(args.get(0).equalsIgnoreCase("remove")) type = 0;
+			
+			if(type == -1) { // Illegal Argument
+				return BotUtil.genRetMsg(sender.getId(), MSG_HELP);
+			} else {
+				boolean whitelisted = type == 1;
+				String username = args.get(1);
+				OfflinePlayer player = ConnectionPlugin.server().getOfflinePlayer(username);
+				player.setWhitelisted(whitelisted);
+				return BotUtil.genRetMsg(sender.getId(), String.format(whitelisted?MSG_RESULT_ADD:MSG_RESULT_REMOVE, username));
 			}
 		}
-		
-		
-		return "// Unknwon Command";
-	}
-	
-	public String getHelp(User user) {
-		
-		MessageBuilder mb = new MessageBuilder();
-		mb.add(new ComponentAt(user.getId())).newLine();
-		mb.add("[[Whitelist]]").newLine();
-		mb.add("!whitelist add <player>");
-		mb.add("!whitelist remove <player>");
-		
-		return mb.toString();
-		
-	}
-	
-	public String getOperateDone(User user, OfflinePlayer player, boolean add) {
-		
-		MessageBuilder mb = new MessageBuilder();
-		mb.add(new ComponentAt(user.getId())).newLine();
-		mb.add("[[Whitelist]]").newLine();
-		mb.add(String.format("Set %s to"+(add?" ":" not ")+"whitelisted", player.getName()));
-		
-		return mb.toString();
-	}
-	
-	public String getNoPerm(User user) {
-		
-		MessageBuilder mb = new MessageBuilder();
-		mb.add(new ComponentAt(user.getId())).newLine();
-		mb.add("[[Whitelist]]").newLine();
-		mb.add("You don't have permission to do so!");
-		
-		return mb.toString();
 		
 	}
 	

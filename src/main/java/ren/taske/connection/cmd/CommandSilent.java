@@ -8,6 +8,7 @@ import cc.moecraft.icq.event.events.message.EventMessage;
 import cc.moecraft.icq.sender.message.MessageBuilder;
 import cc.moecraft.icq.sender.message.components.ComponentAt;
 import cc.moecraft.icq.user.User;
+import ren.taske.connection.util.BotUtil;
 import ren.taske.user.TUser;
 
 public class CommandSilent implements EverywhereCommand {
@@ -17,7 +18,9 @@ public class CommandSilent implements EverywhereCommand {
 		return new CommandProperties("silent", "si");
 	}
 	
-	
+	public static final String[] MSG_HELP = new String[] {
+		"[[Silent]]", "!silent", "!silent <true/false>"
+	};
 	
 	@Override
 	public String run(EventMessage event, User sender, String command, ArrayList<String> args) {
@@ -31,7 +34,7 @@ public class CommandSilent implements EverywhereCommand {
 			user.setSilent(value);
 			return getStatus(sender.getId(), user.isSilent());
 		}
-		return null;
+		return BotUtil.genRetMsg(sender.getId(), MSG_HELP);
 	}
 	
 	public static String getStatus(long id, boolean status) {

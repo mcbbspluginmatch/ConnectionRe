@@ -31,7 +31,7 @@ public class CommandNickname implements EverywhereCommand {
 		return null;
 	}
 	
-	public String retNickname(String nickname, User sender, boolean isNew) {
+	public static String retNickname(String nickname, User sender, boolean isNew) {
 		
 		MessageBuilder mb = new MessageBuilder();
 		
