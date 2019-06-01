@@ -1,0 +1,3 @@
+name: ConnectionRe
+main: ren.taske.connection.ConnectionPlugin
+version: 1.0
