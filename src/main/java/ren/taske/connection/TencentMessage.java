@@ -17,6 +17,11 @@ public class TencentMessage extends IcqListener {
 		String message = evt.getMessage();
 		String username;
 		
+		// Fix #4
+		if(message.startsWith(Config.CMD_PREFIX)) {
+			return;
+		}
+		
 		if(!tu.isSilent()) {
 			if(tu.hasNickname()) {
 				username = tu.getNickname(sender);

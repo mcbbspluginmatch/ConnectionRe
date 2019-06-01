@@ -17,7 +17,7 @@ public class McBot implements Runnable {
 		PicqConfig config = new PicqConfig(in).setColorSupportLevel(ColorSupportLevel.DISABLED);
 		bot = new PicqBotX(config);
 		bot.addAccount("BOT", url, out);
-		bot.enableCommandManager("!");
+		bot.enableCommandManager(Config.CMD_PREFIX);
 		bot.getEventManager().registerListener(new TencentMessage());
 		
 		bot.getCommandManager().registerCommands(new CommandWhitelist(), new CommandNickname(), new CommandSilent());
