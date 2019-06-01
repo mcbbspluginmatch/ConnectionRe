@@ -68,6 +68,7 @@ public class ConnectionPlugin extends JavaPlugin {
 		
 		log("[Remote Server (CoolQ)] "+url+":"+out);
 		log("[Local Server (ConnectionRe)] 127.0.0.1:"+in);
+		log("[Command Prefix] "+Config.CMD_PREFIX);
 		
 		bot = new McBot(in, out, url);
 		bot_thread = new Thread(bot);

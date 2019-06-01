@@ -42,16 +42,16 @@ public class Config {
 		 *     Prepare
 		 * **************************/
 		
-		if(!basic.has(_PORT_IN))  basic.setInteger(_PORT_IN, 25561);
-		if(!basic.has(_PORT_OUT)) basic.setInteger(_PORT_OUT, 25560);
-		if(!basic.has(_URL_OUT))  basic.setString(_URL_OUT, "127.0.0.1");
-		
-		if(!tencent.has(_GROUP_ID))   tencent.setLong(_GROUP_ID, 740764124L);
-		if(!tencent.has(_OWNER_ID))   tencent.setLong(_OWNER_ID, 180017725L);
-		if(!tencent.has(_CMD_PREFIX)) tencent.setString(_CMD_PREFIX, "!");
-		
-		if(!function.has(_SERVER_START_STOP_MESSAGE)) function.setBoolean(_SERVER_START_STOP_MESSAGE, true);
-		if(!function.has(_PLAYER_JOIN_LEAVE_MESSAGE)) function.setBoolean(_PLAYER_JOIN_LEAVE_MESSAGE, true);
+//		if(!basic.has(_PORT_IN))  basic.setInteger(_PORT_IN, 25561);
+//		if(!basic.has(_PORT_OUT)) basic.setInteger(_PORT_OUT, 25560);
+//		if(!basic.has(_URL_OUT))  basic.setString(_URL_OUT, "127.0.0.1");
+//		
+//		if(!tencent.has(_GROUP_ID))   tencent.setLong(_GROUP_ID, 740764124L);
+//		if(!tencent.has(_OWNER_ID))   tencent.setLong(_OWNER_ID, 180017725L);
+//		if(!tencent.has(_CMD_PREFIX)) tencent.setString(_CMD_PREFIX, "!");
+//		
+//		if(!function.has(_SERVER_START_STOP_MESSAGE)) function.setBoolean(_SERVER_START_STOP_MESSAGE, true);
+//		if(!function.has(_PLAYER_JOIN_LEAVE_MESSAGE)) function.setBoolean(_PLAYER_JOIN_LEAVE_MESSAGE, true);
 		
 		/* **************************
 		 *     Load
@@ -61,8 +61,9 @@ public class Config {
 		PORT_OUT = basic.getInteger(_PORT_OUT, 80);
 		URL_OUT  = basic.getString(_URL_OUT, "127.0.0.1");
 		
-		GROUP_ID = tencent.getLong(_GROUP_ID, 740764124L);
-		OWNER_ID = tencent.getLong(_OWNER_ID, 180017725L);
+		GROUP_ID   = tencent.getLong(_GROUP_ID, 740764124L);
+		OWNER_ID   = tencent.getLong(_OWNER_ID, 180017725L);
+		CMD_PREFIX = tencent.getString(_CMD_PREFIX, "!");
 		
 		SERVER_START_AND_STOP_MESSAGE = function.getBoolean(_SERVER_START_STOP_MESSAGE, true);
 		PLAYER_JOIN_AND_LEAVE_MESSAGE = function.getBoolean(_PLAYER_JOIN_LEAVE_MESSAGE, true);
