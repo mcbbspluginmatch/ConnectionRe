@@ -14,6 +14,8 @@ public class McMessage implements Listener {
 			message = message.substring(1);
 			String msg = String.format("\uff3b%s\uff3d%s", username, message);
 			ConnectionPlugin.getApi().sendGroupMsg(Config.GROUP_ID, msg);
+			// Set the message in Minecraft to what outprinted in QQ
+			evt.setMessage(message);
 		}
 	}
 	
