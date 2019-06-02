@@ -7,6 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import cc.moecraft.icq.sender.IcqHttpApi;
+import ren.taske.connection.cmd.mc.CommandSilentMc;
 
 public class ConnectionPlugin extends JavaPlugin {
 	
@@ -28,6 +29,8 @@ public class ConnectionPlugin extends JavaPlugin {
 		
 		getServer().getPluginManager().registerEvents(new McMessage(), this);
 		getServer().getPluginManager().registerEvents(new ServerMessage(), this);
+		
+		getCommand("silent").setExecutor(new CommandSilentMc());
 		
 		new BukkitRunnable() {
 			
