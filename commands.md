@@ -34,3 +34,9 @@
 // 设置QQ号的游戏内昵称
 !nickname-admin <qqid> <nickname>
 ```
+
+## !list
+```
+// 获取游戏内玩家列表
+!list
+```

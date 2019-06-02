@@ -13,9 +13,9 @@ public class ConnectionPlugin extends JavaPlugin {
 	public static Thread bot_thread;
 	public static McBot bot;
 	
-	public static Server server;
+	private static Server server;
 	
-	public static Logger logger;
+	private static Logger logger;
 	
 	public static boolean botlife;
 	
