@@ -25,3 +25,12 @@
 // 设置禁言
 !silent <true/false>
 ```
+
+## !nickname-admin
+```
+// 需要管理员权限
+// 获取QQ号的游戏内昵称
+!nickname-admin <qqid>
+// 设置QQ号的游戏内昵称
+!nickname-admin <qqid> <nickname>
+```
