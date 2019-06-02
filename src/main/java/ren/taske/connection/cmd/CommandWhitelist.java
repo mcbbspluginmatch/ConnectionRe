@@ -22,7 +22,7 @@ public class CommandWhitelist implements EverywhereCommand {
 		"[[Whitelist/OP]]", "!whitelist add <player>", "!whitelist remove <player>"	
 	};
 	
-	public static final String MSG_UNAUTHORIZED  = "You have not permission!";
+	public static final String MSG_UNAUTHORIZED  = "You have no permission!";
 	public static final String MSG_RESULT_ADD    = "Added %s to Whitelist";
 	public static final String MSG_RESULT_REMOVE = "Removed %s in Whitelist";
 	
