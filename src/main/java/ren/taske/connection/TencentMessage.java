@@ -22,6 +22,11 @@ public class TencentMessage extends IcqListener {
 			return;
 		}
 		
+		// Check if starts with prefix
+		if(Config.REQUIRE_PREFIX && !(message.startsWith("!") || message.startsWith("\uff01"))) {
+			return;
+		}
+		
 		if(!tu.isSilent()) {
 			if(tu.hasNickname()) {
 				username = tu.getNickname(sender);
