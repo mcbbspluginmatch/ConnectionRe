@@ -4,7 +4,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-import ren.taske.user.MUser;
+import ren.taske.connection.database.FileManager;
+import ren.taske.user.MinecraftUser;
 
 public class McMessage implements Listener {
 
@@ -12,7 +13,7 @@ public class McMessage implements Listener {
 	public void message(AsyncPlayerChatEvent evt) {
 		String message = evt.getMessage();
 		String username = evt.getPlayer().getName();
-		MUser user = new MUser(username);
+		MinecraftUser user = FileManager.getMinecraftUser(username);
 		if(user.isSilent()) return;
 		if(message.length() > 1 && (message.startsWith("!") || message.startsWith("\uff01"))) {
 			message = message.substring(1);

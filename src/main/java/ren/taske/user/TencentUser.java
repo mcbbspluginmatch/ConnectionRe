@@ -3,9 +3,10 @@ package ren.taske.user;
 import java.io.File;
 
 import cc.moecraft.icq.user.User;
+import ren.taske.connection.database.FileManager;
 import ren.taske.data.SimpleDataStorage;
 
-public class TUser {
+public class TencentUser {
 
 	public static final String _NICKNAME = "nickname";
 	public static final String _SILENT = "shut-up";
@@ -13,9 +14,10 @@ public class TUser {
 	final long userid;
 	
 	final File datafile;
+	
 	final SimpleDataStorage data;
 	
-	public TUser(long userid) {
+	public TencentUser(long userid) {
 		this.userid = userid;
 		datafile = new File("ConnectionRe/data/"+userid+".dat");
 		data = new SimpleDataStorage(datafile);
@@ -53,6 +55,18 @@ public class TUser {
 	
 	public boolean isSilent() {
 		return data.getBoolean(_SILENT, false);
+	}
+	
+	public PermissionUser getPermission() {
+		return FileManager.getPermission(userid);
+	}
+	
+	public void setPermission(String key, boolean val) {
+		getPermission().setPermission(key, val);
+	}
+	
+	public boolean hasPermission(String key) {
+		return getPermission().hasPermission(key);
 	}
 	
 }

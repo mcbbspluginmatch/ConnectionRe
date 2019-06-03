@@ -8,9 +8,10 @@ import cc.moecraft.icq.event.events.message.EventMessage;
 import cc.moecraft.icq.sender.message.MessageBuilder;
 import cc.moecraft.icq.sender.message.components.ComponentAt;
 import cc.moecraft.icq.user.User;
+import ren.taske.connection.database.FileManager;
 import ren.taske.connection.util.BotUtil;
 import ren.taske.data.util.ParseUtil;
-import ren.taske.user.TUser;
+import ren.taske.user.TencentUser;
 
 public class CommandNicknameAdmin implements EverywhereCommand {
 
@@ -25,12 +26,11 @@ public class CommandNicknameAdmin implements EverywhereCommand {
 		"!nickname-admin <qqid> <nickname>"
 	};
 	
-	public static final String MSG_UNAUTHORIZED = "You have no permission!";
 	public static final String MSG_WRONG_USERID = "The userid is probably wrong!";
 	
 	@Override
 	public String run(EventMessage event, User sender, String command, ArrayList<String> args) {
-		if(!BotUtil.isOwner(sender)) return BotUtil.genRetMsg(sender, MSG_UNAUTHORIZED);
+		if(!BotUtil.isOwner(sender)) return BotUtil.getUnauthorizedMessage(sender);
 		
 		int length = args.size();
 		if(length > 0) {
@@ -38,7 +38,7 @@ public class CommandNicknameAdmin implements EverywhereCommand {
 			if(userid == null) {
 				return BotUtil.genRetMsg(sender, MSG_WRONG_USERID);
 			} else {
-				TUser user = new TUser(userid);
+				TencentUser user = FileManager.getTencentUser(sender);
 				boolean changed = false;
 				if(length > 1) {
 					user.setNickname(args.get(1));

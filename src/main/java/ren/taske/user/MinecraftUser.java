@@ -4,7 +4,7 @@ import java.io.File;
 
 import ren.taske.data.SimpleDataStorage;
 
-public class MUser {
+public class MinecraftUser {
 
 	public static final String _SILENT = "silent";
 	
@@ -13,7 +13,7 @@ public class MUser {
 	final File datafile;
 	final SimpleDataStorage data;
 	
-	public MUser(String name) {
+	public MinecraftUser(String name) {
 		this.name = name;
 		datafile = new File("ConnectionRe/data/mc/"+name+".dat");
 		data = new SimpleDataStorage(datafile);

@@ -8,7 +8,10 @@ import cc.moecraft.icq.event.events.message.EventMessage;
 import cc.moecraft.icq.sender.message.MessageBuilder;
 import cc.moecraft.icq.sender.message.components.ComponentAt;
 import cc.moecraft.icq.user.User;
-import ren.taske.user.TUser;
+import ren.taske.connection.database.FileManager;
+import ren.taske.connection.util.BotUtil;
+import ren.taske.user.PermissionUser;
+import ren.taske.user.TencentUser;
 
 public class CommandNickname implements EverywhereCommand {
 
@@ -19,12 +22,16 @@ public class CommandNickname implements EverywhereCommand {
 	
 	@Override
 	public String run(EventMessage event, User sender, String command, ArrayList<String> args) {
+		TencentUser tu = FileManager.getTencentUser(sender);
+		
+		// Permission Check
+		// Node: app.nickname
+		if(!FileManager.getPermission(sender).hasPermission(PermissionUser._APP_NICKNAME)) return BotUtil.getUnauthorizedMessage(sender);
+		
 		if(args.size() == 0) {
-			TUser tu = new TUser(sender.getId());
 			return retNickname(tu.getNickname(sender), sender, false);
 		}
 		if(args.size() > 0) {
-			TUser tu = new TUser(sender.getId());
 			tu.setNickname(args.get(0));
 			return retNickname(tu.getNickname(sender), sender, true);
 		}

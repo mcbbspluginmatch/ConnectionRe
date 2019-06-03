@@ -8,8 +8,10 @@ import cc.moecraft.icq.event.events.message.EventMessage;
 import cc.moecraft.icq.sender.message.MessageBuilder;
 import cc.moecraft.icq.sender.message.components.ComponentAt;
 import cc.moecraft.icq.user.User;
+import ren.taske.connection.database.FileManager;
 import ren.taske.connection.util.BotUtil;
-import ren.taske.user.TUser;
+import ren.taske.user.PermissionUser;
+import ren.taske.user.TencentUser;
 
 public class CommandSilent implements EverywhereCommand {
 
@@ -24,15 +26,20 @@ public class CommandSilent implements EverywhereCommand {
 	
 	@Override
 	public String run(EventMessage event, User sender, String command, ArrayList<String> args) {
-		TUser user = new TUser(sender.getId());
+		TencentUser tu = FileManager.getTencentUser(sender);
+		
+		// Permission Check
+		// Node: app.silent
+		if(!FileManager.getPermission(sender).hasPermission(PermissionUser._APP_SILENT)) return BotUtil.getUnauthorizedMessage(sender);
+		
 		int length = args.size();
 		if(length == 0) {
-			return getStatus(sender.getId(), user.isSilent());
+			return getStatus(sender.getId(), tu.isSilent());
 		}
 		if(length == 1) {
 			boolean value = Boolean.parseBoolean(args.get(0));
-			user.setSilent(value);
-			return getStatus(sender.getId(), user.isSilent());
+			tu.setSilent(value);
+			return getStatus(sender.getId(), tu.isSilent());
 		}
 		return BotUtil.genRetMsg(sender.getId(), MSG_HELP);
 	}

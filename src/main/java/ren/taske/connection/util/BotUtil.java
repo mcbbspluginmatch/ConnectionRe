@@ -18,6 +18,16 @@ public class BotUtil {
 		return mb.toString().trim();
 	}
 	
+	private static final String MSG_UNAUTHORIZED = "You have no permission!";
+	
+	public static String getUnauthorizedMessage(User user) {
+		return getUnauthorizedMessage(user.getId());
+	}
+	
+	private static String getUnauthorizedMessage(long user) {
+		return genRetMsg(user, MSG_UNAUTHORIZED);
+	}
+	
 	public static boolean isOwner(User user) {
 		return ConnectionPlugin.isOwner(user.getId());
 	}

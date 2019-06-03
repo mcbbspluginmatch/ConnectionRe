@@ -5,14 +5,15 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import ren.taske.user.MUser;
+import ren.taske.connection.database.FileManager;
+import ren.taske.user.MinecraftUser;
 
 public class CommandSilentMc implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		if(sender instanceof Player) {
-			MUser user = new MUser(sender.getName());
+			MinecraftUser user = FileManager.getMinecraftUser(sender.getName());
 			if(args.length > 0) {
 				boolean silent = Boolean.parseBoolean(args[0]);
 				user.setSilent(silent);
