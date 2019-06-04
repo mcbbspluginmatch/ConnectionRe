@@ -6,6 +6,7 @@ import org.bukkit.Server;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import cc.moecraft.icq.command.interfaces.IcqCommand;
 import cc.moecraft.icq.sender.IcqHttpApi;
 import ren.taske.connection.cmd.mc.CommandSilentMc;
 
@@ -74,6 +75,11 @@ public class ConnectionPlugin extends JavaPlugin {
 		log("[Command Prefix] "+Config.CMD_PREFIX);
 		
 		bot = new McBot(in, out, url);
+		
+		log("");
+		for(IcqCommand cmd : bot.getCommandManager().getCommandList()) log("[Registered Command] "+cmd.properties().getName());
+		log("");
+		
 		bot_thread = new Thread(bot);
 		bot_thread.start();
 		

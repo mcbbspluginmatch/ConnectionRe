@@ -7,6 +7,7 @@ import cc.moecraft.icq.event.IcqListener;
 import cc.moecraft.icq.event.events.message.EventMessage;
 import cc.moecraft.icq.user.User;
 import ren.taske.connection.database.FileManager;
+import ren.taske.connection.util.McUtil;
 import ren.taske.user.PermissionUser;
 import ren.taske.user.TencentUser;
 
@@ -40,9 +41,8 @@ public class TencentMessage extends IcqListener {
 				username = evt.getSender().getInfo().getNickname();
 			}
 			
-			String msg = String.format("<%s> %s", username, replace(message));
-			Bukkit.broadcastMessage(msg);
-			ConnectionPlugin.log(msg);
+			String msg = String.format("<%s> %s", username, replace(message.substring(Config.REQUIRE_PREFIX?1:0)));
+			McUtil.bc(msg);
 		}
 		
 	}

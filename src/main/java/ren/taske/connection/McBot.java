@@ -2,6 +2,7 @@ package ren.taske.connection;
 
 import cc.moecraft.icq.PicqBotX;
 import cc.moecraft.icq.PicqConfig;
+import cc.moecraft.icq.command.CommandManager;
 import cc.moecraft.icq.sender.IcqHttpApi;
 import cc.moecraft.logger.environments.ColorSupportLevel;
 import ren.taske.connection.cmd.CommandList;
@@ -24,6 +25,10 @@ public class McBot implements Runnable {
 		
 		bot.getCommandManager().registerCommands(new CommandWhitelist(), new CommandNickname(), new CommandSilent(), new CommandNicknameAdmin(), new CommandList());
 		
+	}
+	
+	public CommandManager getCommandManager() {
+		return bot.getCommandManager();
 	}
 	
 	public void run() {
