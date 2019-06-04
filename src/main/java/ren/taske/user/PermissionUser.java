@@ -1,9 +1,14 @@
 package ren.taske.user;
 
+import ren.taske.connection.Config;
+
 public class PermissionUser extends PermissionStorage {
 
+	final boolean isOwner;
+	
 	public PermissionUser(long userid) {
 		super(Long.toString(userid));
+		this.isOwner = Config.OWNER_ID == userid;
 	}
 	
 	public static final String _APP_SPEAKABLE = "app.speakable";
@@ -17,6 +22,11 @@ public class PermissionUser extends PermissionStorage {
 		setPermission(_APP_SILENT,    true);
 		setPermission(_APP_NICKNAME,  true);
 		
+	}
+	
+	@Override
+	public boolean hasPermission(String key) {
+		return isOwner || super.hasPermission(key);
 	}
 	
 }
