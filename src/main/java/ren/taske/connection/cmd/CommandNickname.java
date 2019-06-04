@@ -2,6 +2,8 @@ package ren.taske.connection.cmd;
 
 import java.util.ArrayList;
 
+import org.bukkit.ChatColor;
+
 import cc.moecraft.icq.command.CommandProperties;
 import cc.moecraft.icq.command.interfaces.EverywhereCommand;
 import cc.moecraft.icq.event.events.message.EventMessage;
@@ -10,6 +12,7 @@ import cc.moecraft.icq.sender.message.components.ComponentAt;
 import cc.moecraft.icq.user.User;
 import ren.taske.connection.database.FileManager;
 import ren.taske.connection.util.BotUtil;
+import ren.taske.connection.util.McUtil;
 import ren.taske.user.PermissionUser;
 import ren.taske.user.TencentUser;
 
@@ -33,6 +36,7 @@ public class CommandNickname implements EverywhereCommand {
 		}
 		if(args.size() > 0) {
 			tu.setNickname(args.get(0));
+			McUtil.bc(String.format(ChatColor.GREEN+"%s(%s)"+ChatColor.RESET+" changed nickname just now", tu.getNickname(), tu.getUserId()));
 			return retNickname(tu.getNickname(sender), sender, true);
 		}
 		return null;

@@ -23,6 +23,10 @@ public class TencentUser {
 		data = new SimpleDataStorage(datafile);
 	}
 	
+	public long getUserId() {
+		return this.userid;
+	}
+	
 	public boolean hasNickname() {
 		return data.has(_NICKNAME);
 	}
