@@ -26,6 +26,7 @@ public class CommandList implements EverywhereCommand {
 	public String run(EventMessage event, User sender, String command, ArrayList<String> args) {
 		List<Player> players = new ArrayList<Player>();
 		players.addAll(ConnectionPlugin.server().getOnlinePlayers());
+		// 这里的意图是什么呢，原本返回的列表就是不可变的 —— 754503921
 		List<String> messages = new ArrayList<String>();
 		messages.add(MSG_HEAD);
 		messages.add(String.format(MSG_STATUS, players.size(), ConnectionPlugin.server().getMaxPlayers()));

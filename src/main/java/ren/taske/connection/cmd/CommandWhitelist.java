@@ -46,6 +46,8 @@ public class CommandWhitelist implements EverywhereCommand {
 			} else {
 				boolean whitelisted = type == 1;
 				String username = args.get(1);
+				// 这个指令执行环境应该不是主线程吧
+				// 异步操作 Bukkit API —— 754503921
 				OfflinePlayer player = ConnectionPlugin.server().getOfflinePlayer(username);
 				player.setWhitelisted(whitelisted);
 				return BotUtil.genRetMsg(sender.getId(), String.format(whitelisted?MSG_RESULT_ADD:MSG_RESULT_REMOVE, username));
